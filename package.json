@@ -96,7 +96,8 @@
     "vfile": "^6.0.3",
     "workerpool": "^9.2.0",
     "ws": "^8.18.2",
-    "yargs": "^18.0.0"
+    "yargs": "^18.0.0",
+    "zenn-cli": "^0.2.1"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",

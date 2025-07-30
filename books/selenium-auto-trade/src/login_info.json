@@ -1,0 +1,13 @@
+{
+    "bank_rakuten": {
+      "id": "1234567890",
+      "pass": "password",
+      "url": "https://fes.rakuten-bank.co.jp/MS/main/RbS?CurrentPageID=START&&COMMAND=LOGIN"
+    },
+    "sec_monex": {
+      "id": "1234567890",
+      "pass": "password",
+      "url": "https://mxp1.monex.co.jp/pc/ITS/login/LoginIDPassword.jsp"
+    }
+  }
+  

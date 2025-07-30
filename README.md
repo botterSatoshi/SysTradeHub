@@ -40,13 +40,38 @@ YAML 定義は `.github/workflows/deploy.yml` を参照してください。
 
 ## Development
 
-```bash
-# 依存パッケージを取得
-pnpm install
+### 💻 GitHub Pages (`content` フォルダ) 
 
-# 開発サーバを立ち上げ
-pnpm dev
-# http://localhost:3000 で確認
+#### 開発サーバを立ち上げ
+
+```bash
+npx quartz build --serve
+# http://localhost:8080 で確認
+```
+
+### ✍️ Zenn (`books` / `articles` フォルダ)  
+
+#### 開発サーバを立ち上げ
+
+```bash
+npx zenn preview 
+# http://localhost:8000 で確認
+```
+
+#### 📝 記事の作成
+
+```bash
+$ npx zenn new:article
+# 記事のURLの一部となるslugを指定して作成することもできます。
+$ npx zenn new:article --slug my-awesome-article
+```
+
+#### 📘 本の作成
+
+```bash
+$ npx zenn new:book
+# 本のURLの一部となるslugを指定して作成することもできます。
+$ npx zenn new:book --slug my-awesome-book
 ```
 
 ## License

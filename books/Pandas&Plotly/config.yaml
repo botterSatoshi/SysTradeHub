@@ -1,0 +1,22 @@
+title: "pandas&Plotly 2D/3Dデータビジュアライゼーション実装ハンドブック"
+summary: "書籍【pandas&Plotly 2D/3Dデータビジュアライゼーション実装ハンドブック】をやってみた記録"
+topics: ["pandas", "Plotly", "python", "not original"] # トピック（5つまで）
+published: false # falseだと下書き
+price: 0 # 有料の場合200〜5000
+chapters:
+  - chap_0_4
+  - chap_1_1_表形式データの構成要素
+  - chap_1_2_データの種類とpandasのデータ型
+  - chap_1_3_DataFrameの情報の確認
+  - chap_1_4_PythonのデータオブジェクトとDataFrameの相互変換
+  - chap_1_5_DataFrameのインポートとエクスポート
+  - chap_2_1_DataFrameの部分選択
+  - chap_2_2_DataFrameの分割
+  - chap_2_3_DataFrame同士の結合
+  - chap_2_4_行や列の追加と削除
+  - chap_3_1_値の演算
+  - chap_3_2_自作関数を適用した操作
+  - chap_3_3_ループ処理への対応
+  - chap_4_1_欠損値の表現とその確認方法
+  - chap_4_2_欠損値の除外・穴埋め・補間
+  - chap_4_3_重複行の削除

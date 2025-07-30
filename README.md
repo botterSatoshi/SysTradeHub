@@ -1,18 +1,58 @@
-# Quartz v4
+# 🪴 SysTradeHub
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+> **Trade your ideas like you trade your code.**  
+> 自分の学び・アイデア・トレードの知見を育てていくデジタルガーデンです。
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
-Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
+## About
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+SysTradeHub は [Quartz v4](https://quartz.jzhao.xyz/) をフォークして構築した、個人用のナレッジベース & アウトプットプラットフォームです。  
+ソースは全て公開しており、だれでもクローン & フォークして自身のデジタルガーデンを作成できます。
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+### 公開サイト
 
-## Sponsors
+| 用途 | URL |
+| :--- | :--- |
+| 💻 GitHub Pages (`content` フォルダ) | https://bottersatoshi.github.io/SysTradeHub/ |
+| ✍️ Zenn (`books` / `articles` フォルダ) | https://zenn.dev/bottersatoshi |
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+## ディレクトリ構成
+
+```text
+SysTradeHub/
+├─ content/        # GitHub Pages で公開される MD/MDX ノート
+├─ books/          # Zenn Book 原稿
+├─ articles/       # Zenn Article 原稿
+├─ .github/
+│   └─ workflows/
+│       └─ deploy.yml  # content → GitHub Pages 自動デプロイ
+└─ quartz/         # Quartz エンジン（独自カスタマイズ）
+```
+
+## CI / CD
+
+`main` ブランチへの push をトリガに GitHub Actions で以下を実行します。
+
+1. 依存パッケージのインストール
+2. Quartz ビルド (`pnpm build`)
+3. 生成した静的サイトを `gh-pages` ブランチへデプロイ
+
+YAML 定義は `.github/workflows/deploy.yml` を参照してください。
+
+## Development
+
+```bash
+# 依存パッケージを取得
+pnpm install
+
+# 開発サーバを立ち上げ
+pnpm dev
+# http://localhost:3000 で確認
+```
+
+## License
+
+This repository is licensed under the MIT License – see `LICENSE.txt` for details.
+
+---
+
+Made with ❤️ & ☕ by [botterSatoshi](https://github.com/bottersatoshi)

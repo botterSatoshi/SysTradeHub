@@ -13,17 +13,17 @@ free: true
 |        | 列の値がキー     | join<br>merge  |
 キーとは、結合するデータ同士の仲介となる識別情報です。結合先と結合元でキーが一致する箇所が結合されます。
 
-![](assets/Pasted%20image%2020240922160029.png)
+![](images/Pasted%20image%2020240922160029.png)
 
 ## 行方向の結合の種類
 外部結合で値が存在しない部分には**NaN**が記入されます。
 
-![](assets/Pasted%20image%2020240922160915.png)
+![](images/Pasted%20image%2020240922160915.png)
 
 ## 列方向の結合の種類
 
 
-![](assets/Pasted%20image%2020240922161806.png)
+![](images/Pasted%20image%2020240922161806.png)
 
 
 ## pandas の結合機能

@@ -18,9 +18,9 @@ free: true
 
 https://jpx-jquants.com/
 
-![](assets/Pasted-image-20230606122151.png)
+![](images/Pasted-image-20230606122151.png)
 
-![](assets/Pasted-image-20230606122302.png)
+![](images/Pasted-image-20230606122302.png)
 
 ### API でトークン取得する場合
 

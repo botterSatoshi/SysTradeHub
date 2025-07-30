@@ -3,9 +3,9 @@ title: 表形式データの構成要素
 free: true
 ---
 
-![](assets/Pasted%20image%2020240916153639.png)
+![](images/Pasted%20image%2020240916153639.png)
 
-![](assets/Pasted%20image%2020240916163401.png)
+![](images/Pasted%20image%2020240916163401.png)
 
 ```python
 df = pd.DataFrame(

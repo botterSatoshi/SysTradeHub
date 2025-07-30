@@ -4,19 +4,10 @@ topics: ["pandas", "Plotly", "python", "not original"] # トピック（5つま�
 published: false # falseだと下書き
 price: 0 # 有料の場合200〜5000
 chapters:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - chap_1_1
+  - chap_2_4
+  - chap_3_3
+  - chap_3_4
+  - chap_7_1
+  - chap_10_1_1
+  - chap_10_1_2

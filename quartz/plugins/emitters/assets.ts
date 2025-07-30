@@ -1,4 +1,4 @@
-import { FilePath, joinSegments, slugifyFilePath } from "../../util/path"
+import { FilePath, joinSegments, slugifyFilePath, QUARTZ } from "../../util/path"
 import { QuartzEmitterPlugin } from "../types"
 import path from "path"
 import fs from "fs"
@@ -25,6 +25,29 @@ const copyFile = async (argv: Argv, fp: FilePath) => {
   return dest
 }
 
+const imageFilesToCopy = async (cfg: QuartzConfig) => {
+  // glob all files in quartz/images folder (if it exists)
+  const imagesDir = joinSegments(QUARTZ, "images")
+  try {
+    return await glob("**", imagesDir, cfg.configuration.ignorePatterns)
+  } catch {
+    // if directory does not exist, return empty list
+    return []
+  }
+}
+
+const copyImageFile = async (argv: Argv, fp: FilePath) => {
+  const src = joinSegments(QUARTZ, "images", fp) as FilePath
+  const dest = joinSegments(argv.output, "images", fp) as FilePath
+
+  // ensure dir exists
+  const dir = path.dirname(dest) as FilePath
+  await fs.promises.mkdir(dir, { recursive: true })
+
+  await fs.promises.copyFile(src, dest)
+  return dest
+}
+
 export const Assets: QuartzEmitterPlugin = () => {
   return {
     name: "Assets",
@@ -32,6 +55,10 @@ export const Assets: QuartzEmitterPlugin = () => {
       const fps = await filesToCopy(argv, cfg)
       for (const fp of fps) {
         yield copyFile(argv, fp)
+      }
+      const imageFps = await imageFilesToCopy(cfg)
+      for (const fp of imageFps) {
+        yield copyImageFile(argv, fp)
       }
     },
     async *partialEmit(ctx, _content, _resources, changeEvents) {

@@ -8,11 +8,36 @@ import { QuartzConfig } from "../../cfg"
 
 const filesToCopy = async (argv: Argv, cfg: QuartzConfig) => {
   // glob all non MD files in content folder and copy it over
-  return await glob("**", argv.directory, ["**/*.md", ...cfg.configuration.ignorePatterns])
+  const contentFiles = await glob("**", argv.directory, ["**/*.md", ...cfg.configuration.ignorePatterns])
+  
+  // Also glob all files in root images folder
+  const rootImagesPath = path.resolve(path.dirname(argv.directory), "images")
+  let imagesFiles: FilePath[] = []
+  
+  if (fs.existsSync(rootImagesPath)) {
+    const imagesGlob = await glob("**", rootImagesPath as FilePath, cfg.configuration.ignorePatterns)
+    // Prefix images files with "images/" and normalize path separators
+    imagesFiles = imagesGlob.map(fp => path.posix.join("images", fp) as FilePath)
+  }
+  
+  return [...contentFiles, ...imagesFiles]
 }
 
 const copyFile = async (argv: Argv, fp: FilePath) => {
-  const src = joinSegments(argv.directory, fp) as FilePath
+  let src: FilePath
+  
+  // Normalize path separators for consistent comparison
+  const normalizedFp = fp.replace(/\\/g, '/')
+  
+  // Check if this is a file from root images folder
+  if (normalizedFp.startsWith("images/")) {
+    // For images files, use the root directory instead of argv.directory
+    const rootDir = path.dirname(argv.directory)
+    src = joinSegments(rootDir, fp) as FilePath
+  } else {
+    // For content files, use argv.directory as before
+    src = joinSegments(argv.directory, fp) as FilePath
+  }
 
   const name = slugifyFilePath(fp)
   const dest = joinSegments(argv.output, name) as FilePath
@@ -39,10 +64,29 @@ export const Assets: QuartzEmitterPlugin = () => {
         const ext = path.extname(changeEvent.path)
         if (ext === ".md") continue
 
+        // Check if the change is in the root images folder
+        const rootImagesPath = path.resolve(path.dirname(ctx.argv.directory), "images")
+        const isRootImageFile = changeEvent.path.startsWith(rootImagesPath)
+        
         if (changeEvent.type === "add" || changeEvent.type === "change") {
-          yield copyFile(ctx.argv, changeEvent.path)
+          if (isRootImageFile) {
+            // Convert absolute path to relative path with "images/" prefix
+            const relativePath = path.relative(path.dirname(ctx.argv.directory), changeEvent.path) as FilePath
+            yield copyFile(ctx.argv, relativePath)
+          } else {
+            // Handle content folder files as before
+            yield copyFile(ctx.argv, changeEvent.path)
+          }
         } else if (changeEvent.type === "delete") {
-          const name = slugifyFilePath(changeEvent.path)
+          let filePath: FilePath
+          if (isRootImageFile) {
+            // Convert absolute path to relative path with "images/" prefix
+            filePath = path.relative(path.dirname(ctx.argv.directory), changeEvent.path) as FilePath
+          } else {
+            filePath = changeEvent.path
+          }
+          
+          const name = slugifyFilePath(filePath)
           const dest = joinSegments(ctx.argv.output, name) as FilePath
           await fs.promises.unlink(dest)
         }

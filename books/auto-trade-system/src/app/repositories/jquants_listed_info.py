@@ -7,6 +7,8 @@ import requests
 import json
 import pandas as pd
 
+from repositories.jquants_auth_token import JQuantsAuthToken
+
 # j-Quants api を用いて上場銘柄一覧を取得、保存するクラス
 class JapanStockListedInfo:
 
@@ -28,6 +30,9 @@ class JapanStockListedInfo:
         jsonResponse = response.json()
         listed = jsonResponse["info"]
 
+        if len(listed) == 0:
+            return None
+        
         # DataFrameに変換し、'Date'列をインデックスとして設定
         df = pd.DataFrame(listed)  
 
@@ -40,3 +45,8 @@ class JapanStockListedInfo:
 
         return df
 
+    
+if __name__ == "__main__":
+    a = JQuantsAuthToken()
+    b = JapanStockListedInfo(a.ID_TOKEN)
+    b.set_listed_stocks()

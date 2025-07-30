@@ -7,6 +7,8 @@ import requests
 import json
 import pandas as pd
 
+from repositories.jquants_auth_token import JQuantsAuthToken
+
 # j-Quants api を用いて決算発表予定日を取得、保存するクラス
 class JapanFinancialAnnouncement:
 
@@ -41,3 +43,11 @@ class JapanFinancialAnnouncement:
         df.to_csv(full_path)
 
         return df
+
+
+    
+
+if __name__ == "__main__":
+    a = JQuantsAuthToken()
+    b = JapanFinancialAnnouncement(a.ID_TOKEN)
+    b.set_financial_announcement()

@@ -7,6 +7,8 @@ import requests
 import json
 import pandas as pd
 
+from repositories.jquants_auth_token import JQuantsAuthToken
+
 # j-Quants api を用いて財務情報を取得、保存するクラス
 class JapanFinancialStatements:
 
@@ -42,3 +44,8 @@ class JapanFinancialStatements:
 
         return df
     
+
+if __name__ == "__main__":
+    a = JQuantsAuthToken()
+    b = JapanFinancialStatements(a.ID_TOKEN)
+    b.set_financial_statements()

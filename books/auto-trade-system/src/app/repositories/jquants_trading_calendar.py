@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 import requests
 import pandas as pd
 
+from repositories.jquants_auth_token import JQuantsAuthToken
+
 # j-Quants api を用いて取引カレンダー（営業日）を取得するクラス
 class JapanTradingCalendar:
 
@@ -41,3 +43,9 @@ class JapanTradingCalendar:
 
         return df
         
+
+    
+if __name__ == "__main__":
+    a = JQuantsAuthToken()
+    b = JapanTradingCalendar(a.ID_TOKEN)
+    b.set_trading_calendar()

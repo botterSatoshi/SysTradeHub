@@ -1,0 +1,9 @@
+title: "自動売買システム"
+summary: ""
+topics: []
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - chap_0_1_前付
+  - chap_0_2_目次

@@ -1,5 +1,0 @@
-pytest
-dotenv
-pandas
-chardet
-shutil
